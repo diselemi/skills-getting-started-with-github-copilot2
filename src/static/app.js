@@ -20,9 +20,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
         const spotsLeft = details.max_participants - details.participants.length;
 
-        // Generate participants list HTML
+        // Generate participants list HTML - displays all registered participants
         const participantsList = details.participants.length > 0
-          ? `<ul>${details.participants.map(p => `<li><span class="participant-name">${p}</span><button class="delete-btn" data-activity="${name}" data-email="${p}" title="Remove participant">✕</button></li>`).join("")}</ul>`
+          ? `<ul>${details.participants.map(p => `<li><span class="participant-name">👤 ${p}</span><button class="delete-btn" data-activity="${name}" data-email="${p}" title="Remove participant">✕</button></li>`).join("")}</ul>`
           : "<p class=\"no-participants\">No participants yet</p>";
 
         activityCard.innerHTML = `
@@ -30,6 +30,7 @@ document.addEventListener("DOMContentLoaded", () => {
           <p>${details.description}</p>
           <p><strong>Schedule:</strong> ${details.schedule}</p>
           <p><strong>Availability:</strong> ${spotsLeft} spots left</p>
+          <!-- Participant Information Section: Displays list of registered students with delete capability -->
           <div class="participants-section">
             <strong>Current Participants:</strong>
             ${participantsList}
