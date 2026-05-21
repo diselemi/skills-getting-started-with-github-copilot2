@@ -41,6 +41,70 @@ activities = {
     }
 }
 
+# Additional activities
+activities.update({
+    "Drama Club": {
+        "description": "Acting workshops and school plays",
+        "schedule": "Wednesdays, 4:00 PM - 6:00 PM",
+        "max_participants": 25,
+        "participants": ["ava@mergington.edu"]
+    },
+    "Robotics Team": {
+        "description": "Build and program robots for competitions",
+        "schedule": "Tuesdays and Thursdays, 5:00 PM - 7:00 PM",
+        "max_participants": 18,
+        "participants": ["liam@mergington.edu", "noah@mergington.edu"]
+    },
+    "Art Club": {
+        "description": "Drawing, painting, and mixed-media projects",
+        "schedule": "Fridays, 3:30 PM - 5:00 PM",
+        "max_participants": 20,
+        "participants": ["isabella@mergington.edu"]
+    },
+    "Debate Team": {
+        "description": "Competitive debate practice and tournaments",
+        "schedule": "Mondays, 4:00 PM - 5:30 PM",
+        "max_participants": 16,
+        "participants": ["oliver@mergington.edu"]
+    },
+    "Science Olympiad": {
+        "description": "Hands-on science and engineering challenges",
+        "schedule": "Thursdays, 4:30 PM - 6:30 PM",
+        "max_participants": 24,
+        "participants": ["sophia@mergington.edu"]
+    },
+    "Math Club": {
+        "description": "Problem solving and math contests",
+        "schedule": "Wednesdays, 3:30 PM - 4:30 PM",
+        "max_participants": 30,
+        "participants": ["ethan@mergington.edu"]
+    },
+    "Photography Club": {
+        "description": "Photo walks, editing, and exhibits",
+        "schedule": "Saturdays, 10:00 AM - 12:00 PM",
+        "max_participants": 20,
+        "participants": ["mia@mergington.edu"]
+    },
+    "Volunteer Squad": {
+        "description": "Community service projects and outreach",
+        "schedule": "Varies (weekend events)",
+        "max_participants": 40,
+        "participants": ["jack@mergington.edu"]
+    },
+    "Music Ensemble": {
+        "description": "Instrumental and vocal rehearsals",
+        "schedule": "Tuesdays, 3:30 PM - 5:00 PM",
+        "max_participants": 35,
+        "participants": ["amelia@mergington.edu"]
+    },
+    "Environmental Club": {
+        "description": "Sustainability projects and campus cleanups",
+        "schedule": "Fridays, 2:30 PM - 4:00 PM",
+        "max_participants": 30,
+        "participants": ["lucas@mergington.edu"]
+    }
+})
+
 
 @app.get("/")
 def root():
@@ -62,6 +126,18 @@ def signup_for_activity(activity_name: str, email: str):
     # Get the specific activity
     activity = activities[activity_name]
 
+    # Normalize incoming email
+    normalized_email = email.strip().lower()
+
+    # Prevent duplicate signups (case / whitespace insensitive)
+    existing = [p.strip().lower() for p in activity.get("participants", [])]
+    if normalized_email in existing:
+        raise HTTPException(status_code=400, detail="Student already signed up")
+
+    # Respect max participants
+    if len(existing) >= activity.get("max_participants", float("inf")):
+        raise HTTPException(status_code=400, detail="Activity is full")
+
     # Add student
-    activity["participants"].append(email)
-    return {"message": f"Signed up {email} for {activity_name}"}
+    activity["participants"].append(normalized_email)
+    return {"message": f"Signed up {normalized_email} for {activity_name}"}
