@@ -41,6 +41,70 @@ activities = {
     }
 }
 
+# Additional activities
+activities.update({
+    "Drama Club": {
+        "description": "Acting workshops and school plays",
+        "schedule": "Wednesdays, 4:00 PM - 6:00 PM",
+        "max_participants": 25,
+        "participants": ["ava@mergington.edu"]
+    },
+    "Robotics Team": {
+        "description": "Build and program robots for competitions",
+        "schedule": "Tuesdays and Thursdays, 5:00 PM - 7:00 PM",
+        "max_participants": 18,
+        "participants": ["liam@mergington.edu", "noah@mergington.edu"]
+    },
+    "Art Club": {
+        "description": "Drawing, painting, and mixed-media projects",
+        "schedule": "Fridays, 3:30 PM - 5:00 PM",
+        "max_participants": 20,
+        "participants": ["isabella@mergington.edu"]
+    },
+    "Debate Team": {
+        "description": "Competitive debate practice and tournaments",
+        "schedule": "Mondays, 4:00 PM - 5:30 PM",
+        "max_participants": 16,
+        "participants": ["oliver@mergington.edu"]
+    },
+    "Science Olympiad": {
+        "description": "Hands-on science and engineering challenges",
+        "schedule": "Thursdays, 4:30 PM - 6:30 PM",
+        "max_participants": 24,
+        "participants": ["sophia@mergington.edu"]
+    },
+    "Math Club": {
+        "description": "Problem solving and math contests",
+        "schedule": "Wednesdays, 3:30 PM - 4:30 PM",
+        "max_participants": 30,
+        "participants": ["ethan@mergington.edu"]
+    },
+    "Photography Club": {
+        "description": "Photo walks, editing, and exhibits",
+        "schedule": "Saturdays, 10:00 AM - 12:00 PM",
+        "max_participants": 20,
+        "participants": ["mia@mergington.edu"]
+    },
+    "Volunteer Squad": {
+        "description": "Community service projects and outreach",
+        "schedule": "Varies (weekend events)",
+        "max_participants": 40,
+        "participants": ["jack@mergington.edu"]
+    },
+    "Music Ensemble": {
+        "description": "Instrumental and vocal rehearsals",
+        "schedule": "Tuesdays, 3:30 PM - 5:00 PM",
+        "max_participants": 35,
+        "participants": ["amelia@mergington.edu"]
+    },
+    "Environmental Club": {
+        "description": "Sustainability projects and campus cleanups",
+        "schedule": "Fridays, 2:30 PM - 4:00 PM",
+        "max_participants": 30,
+        "participants": ["lucas@mergington.edu"]
+    }
+})
+
 
 @app.get("/")
 def root():
